@@ -1,0 +1,59 @@
+
+<form [formGroup]="infectedForm" (ngSubmit)="MarkInfectedPerson()">
+<h1>Mark the Infected Person:</h1>
+   <label>
+     PID:
+     <input type="text" formControlName="ipid">
+   </label>
+
+ <label>
+   <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+</label> 
+<div>
+   <h1>Tracing out Nearby People:</h1>
+   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  
+   <label>
+     PID:
+     <input type="text" formControlName="pid">
+   </label>
+ 
+   <label>
+     Date:
+     <input type="date" formControlName="date">
+   </label>
+ <label>
+   <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+</label> 
+</form>
+</div>
+<h1>Map View:</h1>
+<div class="map" id="map" class="match-parent"></div>
+<h1>Tabular View:</h1>
+<div class="table-responsive sample">
+ <table class='table table-hover'>
+   <thead>
+     <tr>
+       <th>Sr.No</th>
+      <th class="tb-width">People ID</th>
+       <th>Distance(in Metres)</th>
+       <th>Status</th>
+       <th>Date</th>
+       <th>Time</th>
+      </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor="let people of people;let i= index">
+       <td>{{i+1}}</td>
+      <td>{{people.pid}}</td>
+       <td [ngStyle]="people.distance<300?{backgroundColor:'red'}:{backgroundColor:'orange'}">{{people.distance}}</td>
+       <td >{{people.status}}</td>
+       <td>{{people.day}}/{{people.month}}/{{people.year}}</td>
+       <td >{{people.time}}</td>
+
+      </tr>
+   </tbody>
+ </table>
+</div>
+
+ 
